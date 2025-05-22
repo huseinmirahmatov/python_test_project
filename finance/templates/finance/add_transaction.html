@@ -1,7 +1,15 @@
-<h1>Добавить операцию</h1>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Сохранить</button>
+{% extends 'finance/base.html' %}
+
+{% block title %}Добавить транзакцию{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Добавить транзакцию</h1>
+
+<form method="post" class="card p-4 bg-white shadow-sm">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success mt-3">Сохранить</button>
 </form>
-<a href="{% url 'transaction_list' %}">Назад</a>
+
+<a href="{% url 'transaction_list' %}" class="btn btn-link mt-3">Назад к списку</a>
+{% endblock %}

@@ -1,27 +1,59 @@
-<h1>Доходы и Расходы</h1>
+{% extends 'finance/base.html' %}
 
-<p><strong>Доход:</strong> {{ total_income }}$</p>
-<p><strong>Расход:</strong> {{ total_expense }}$</p>
-<p><strong>Итоговый Баланс:</strong> {{ balance }}$</p>
+{% block title %}Список транзакций{% endblock %}
 
-<a href="{% url 'add_transaction' %}">Добавить операцию</a>
+{% block content %}
+<h1 class="mb-4">Список транзакций</h1>
 
-<h2>История транзакций</h2>
-<table border="1" cellpadding="5">
-  <tr>
-    <th>Дата</th>
-    <th>Тип</th>
-    <th>Сумма</th>
-    <th>Описание</th>
-    <th>Баланс после</th>
-  </tr>
-  {% for t in transactions %}
-  <tr>
-    <td>{{ t.date|date:"d.m.Y H:i" }}</td>
-    <td>{{ t.type }}</td>
-    <td>{{ t.amount }}$</td>
-    <td>{{ t.description }}</td>
-    <td>{{ t.balance_after }}$</td>
-  </tr>
-  {% endfor %}
+<div class="mb-4">
+    <a href="{% url 'add_transaction' %}" class="btn btn-primary">Добавить транзакцию</a>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Доходы</h5>
+                <p class="card-text">${{ total_income }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-danger mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Расходы</h5>
+                <p class="card-text">${{ total_expense }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-info mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Баланс</h5>
+                <p class="card-text">${{ balance }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Тип</th>
+            <th>Сумма</th>
+            <th>Описание</th>
+            <th>Дата</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for t in transactions %}
+        <tr>
+            <td>{{ t.get_type_display }}</td>
+            <td>${{ t.amount }}</td>
+            <td>{{ t.description }}</td>
+            <td>{{ t.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
+{% endblock %}
