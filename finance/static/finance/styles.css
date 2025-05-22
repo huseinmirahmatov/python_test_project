@@ -1,0 +1,17 @@
+/* Плавность при наведении */
+.card,
+.btn {
+    transition: all 0.3s ease;
+}
+
+/* Hover-эффект для карточек */
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Hover-эффект для кнопок */
+.btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
