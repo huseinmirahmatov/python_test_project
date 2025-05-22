@@ -79,7 +79,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "dohod_rashod",
         "USER": "postgres",
-        "PASSWORD": "mypassword123",  # замените на простой пароль без спецсимволов
+        "PASSWORD": "mypassword123",
         "HOST": "localhost",
         "PORT": "5432",
     }

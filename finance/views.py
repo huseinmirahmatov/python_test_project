@@ -4,12 +4,21 @@ from .models import Transaction
 from .forms import TransactionForm
 from .serializers import TransactionSerializer
 from rest_framework import viewsets
+from django.contrib import messages
+
+
+def delete_all_transactions(request):
+    if request.method == "POST":
+        Transaction.objects.all().delete()
+        messages.success(request, "Все транзакции были удалены.")
+        return redirect("transaction_list")
+    return redirect("transaction_list")
 
 
 # Веб-страница: список транзакций с балансом после каждой операции
 def transaction_list(request):
     # Получаем все транзакции по порядку времени (от старых к новым)
-    transactions = Transaction.objects.all().order_by("created_at")
+    transactions = Transaction.objects.all().order_by("-created_at")
 
     running_balance = 0
     transaction_data = []
