@@ -1,0 +1,27 @@
+<h1>Доходы и Расходы</h1>
+
+<p><strong>Доход:</strong> {{ total_income }}$</p>
+<p><strong>Расход:</strong> {{ total_expense }}$</p>
+<p><strong>Итоговый Баланс:</strong> {{ balance }}$</p>
+
+<a href="{% url 'add_transaction' %}">Добавить операцию</a>
+
+<h2>История транзакций</h2>
+<table border="1" cellpadding="5">
+  <tr>
+    <th>Дата</th>
+    <th>Тип</th>
+    <th>Сумма</th>
+    <th>Описание</th>
+    <th>Баланс после</th>
+  </tr>
+  {% for t in transactions %}
+  <tr>
+    <td>{{ t.date|date:"d.m.Y H:i" }}</td>
+    <td>{{ t.type }}</td>
+    <td>{{ t.amount }}$</td>
+    <td>{{ t.description }}</td>
+    <td>{{ t.balance_after }}$</td>
+  </tr>
+  {% endfor %}
+</table>
